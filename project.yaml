@@ -1,0 +1,46 @@
+kind: project
+metadata:
+  name: parcheggi
+spec:
+  functions:
+  - url: src/download-all.py
+    name: download-all
+    kind: job
+    image: mlrun/mlrun
+    handler: downloader
+  - url: src/extract_parkings.py
+    name: extract-parkings
+    kind: job
+    image: mlrun/mlrun
+    handler: extract_parkings
+  - url: src/aggregate_parkings.py
+    name: aggregate-parkings
+    kind: job
+    image: mlrun/mlrun
+    handler: aggregate_parkings
+  - url: src/parkings_last_data.py
+    name: extract-parkings-latest
+    kind: job
+    image: mlrun/mlrun
+    handler: parkings_last_data
+  - url: src/parkings_to_db.py
+    name: to-db
+    kind: job
+    image: mlrun/mlrun
+    handler: to_db
+    requirements:
+    - sqlalchemy
+    - psycopg2-binary
+  workflows:
+  - path: ./data_update_pipeline.py
+    name: data-update-pipeline
+    handler: pipeline
+  artifacts: []
+  conda: ''
+  source: git://github.com/scc-digitalhub/gdb-project-parkings.git
+  load_source_on_run: true
+  desired_state: online
+  build:
+    commands: []
+    requirements: []
+  custom_packagers: []
