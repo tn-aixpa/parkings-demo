@@ -32,7 +32,7 @@ spec:
     - sqlalchemy
     - psycopg2-binary
   workflows:
-  - path: ./data_update_pipeline.py
+  - path: ./src/data_update_pipeline.py
     name: data-update-pipeline
     handler: pipeline
   artifacts: []
