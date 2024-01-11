@@ -1,6 +1,7 @@
 kind: project
 metadata:
   name: parcheggi
+  created: '2023-12-21T16:37:58.071000'
 spec:
   functions:
   - url: src/download-all.py
@@ -31,16 +32,27 @@ spec:
     requirements:
     - sqlalchemy
     - psycopg2-binary
+  - url: src/train_predictors.py
+    name: predict-day
+    kind: job
+    image: mlrun/mlrun
+    handler: predict_day
+    requirements:
+    - sqlalchemy
+    - psycopg2-binary
   workflows:
   - path: ./src/data_update_pipeline.py
     name: data-update-pipeline
     handler: pipeline
   artifacts: []
   conda: ''
-  source: git://gitlab.hpc.cineca.it/dt-data-projects/gdb-project-parkings.git
-  load_source_on_run: true
+  source: https://gitlab.hpc.cineca.it/dt-data-projects/gdb-project-parkings.git
+  origin_url: git://github.com/scc-digitalhub/gdb-project-parkings.git#refs/heads/main
+  load_source_on_run: false
   desired_state: online
   build:
     commands: []
     requirements: []
   custom_packagers: []
+status:
+  state: online
