@@ -9,7 +9,7 @@ import os
 
 def to_point(point):
     today = datetime.datetime.today()
-    return datetime.datetime(today.year, today.month, today.day, int(7 + point * 20 / 60), int(point * 20 % 60))
+    return datetime.datetime(today.year, today.month, today.day, int(point * 30 / 60), int(point * 30 % 60))
 
 @mlrun.handler()
 def predict_day(context, parkings_di: mlrun.DataItem):
@@ -18,10 +18,8 @@ def predict_day(context, parkings_di: mlrun.DataItem):
     df_clean = df_clean.drop(columns=['lat', 'lon'])
     df_clean.data = df_clean.data.astype('datetime64')
     df_clean['occupied'] = df_clean.posti_occupati / df_clean.posti_totali
-    df_clean['date_time_slice'] = df_clean.data.dt.round('15min')
+    df_clean['date_time_slice'] = df_clean.data.dt.round('30min')
     df_clean['date'] = df_clean.data.dt.date
-    df_clean = df_clean[df_clean.date_time_slice.dt.hour < 23]
-    df_clean = df_clean[df_clean.date_time_slice.dt.hour >= 7]
     df_clean = df_clean[df_clean.date_time_slice >= (datetime.datetime.today() - pd.DateOffset(30))]
     df_clean = df_clean[df_clean.date <= (datetime.datetime.today() - pd.DateOffset(1))]
     df_clean = df_clean.drop(['date'], axis=1)
