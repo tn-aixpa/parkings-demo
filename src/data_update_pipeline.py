@@ -13,6 +13,7 @@ def pipeline():
     run_parkings = project.run_function("extract-parkings", inputs={'di':run_download.outputs["dataset"]}, outputs=["parkings"])
 
     run_aggregate = project.run_function("aggregate-parkings", inputs={'di':run_download.outputs["dataset"]}, outputs=["parking_data_aggregated"])
-    
+
+    project.run_function("predict-day", inputs={'parkings_di': run_download.outputs["dataset"]}, auto_build=True)
+
     project.run_function("to-db", inputs={'agg_di': run_aggregate.outputs["parking_data_aggregated"], 'parkings_di': run_parkings.outputs["parkings"]}, auto_build=True)
-    project.run_function("predict-day", inputs={'parkings_di': run_aggregate.outputs["dataset"]}, auto_build=True)
