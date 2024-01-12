@@ -47,7 +47,7 @@ spec:
     handler: pipeline
   artifacts: []
   conda: ''
-  source: https://gitlab.hpc.cineca.it/dt-data-projects/gdb-project-parkings.git
+  source: git://gitlab.hpc.cineca.it/dt-data-projects/gdb-project-parkings.git
   origin_url: git://github.com/scc-digitalhub/gdb-project-parkings.git#refs/heads/main
   load_source_on_run: false
   desired_state: online
