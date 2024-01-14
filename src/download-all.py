@@ -5,6 +5,21 @@ import requests
 
 @mlrun.handler(outputs=["dataset"])
 def downloader(context, url: mlrun.DataItem):
+    """
+    Downloads a dataset from a given URL and returns it as a Pandas DataFrame.
+
+    Parameters:
+    ----------
+    context : mlrun.MLContext
+        The MLRun context object.
+    url : mlrun.DataItem
+        The URL of the dataset to download.
+
+    Returns:
+    -------
+    pandas.DataFrame
+        The downloaded dataset as a Pandas DataFrame.
+    """
     # read and rewrite to normalize and export as data
     df = url.as_df(format='csv',sep=";")
     df[['lat', 'lon']] = df['coordinate'].str.split(', ',expand=True)

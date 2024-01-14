@@ -7,6 +7,13 @@ import os
 
 @mlrun.handler()
 def to_db(context, agg_di: mlrun.DataItem, parkings_di: mlrun.DataItem):
+    """
+    Inserts aggregated parking data and parking data into the database.
+
+    :param context: The MLRun context object.
+    :param agg_di: The aggregated parking data as a DataItem object.
+    :param parkings_di: The parking data as a DataItem object.
+    """
     USERNAME = context.get_secret('DB_USERNAME')
     PASSWORD = context.get_secret('DB_PASSWORD')
     engine = create_engine('postgresql://'+USERNAME+':'+PASSWORD+'@database-postgres-cluster/digitalhub')
