@@ -2,12 +2,13 @@ import datetime
 import requests
 import json
 import pandas as pd
+from sqlalchemy import create_engine
 import mlrun
 
 @mlrun.handler(outputs=["parking_data_latest"])
 def parkings_last_data(context):
     """
-    Downloads the latest parking data from the API and returns it as a DataFrame.
+    Downloads the latest parking data from the API and returns it as a DataFrame saving the DataFrame to PostgreSQL database.
 
     Args:
         context (mlrun.MLClientCtx): The MLRun context object.
@@ -35,4 +36,9 @@ def parkings_last_data(context):
         json_data = json.load(f)
         df_latest = pd.json_normalize(json_data['results']).drop(columns=['guid', 'occupazione']).rename(columns={"coordinate.lon": "lon", "coordinate.lat": "lat"})
 
+    # write data to database
+    USERNAME = context.get_secret('DB_USERNAME')
+    PASSWORD = context.get_secret('DB_PASSWORD')
+    engine = create_engine('postgresql://'+USERNAME+':'+PASSWORD+'@database-postgres-cluster/digitalhub')
+    df_latest.as_df().to_sql('parkings_latest', engine, if_exists="replace")
     return df_latest
