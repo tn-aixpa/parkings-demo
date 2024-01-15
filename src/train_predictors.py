@@ -111,4 +111,19 @@ def predict_day(context, parkings_di: mlrun.DataItem):
         # Generate predictions for the next 48 steps
         pred = results_SAR.forecast(steps=48).reset_index()
 
-        # Add the 'parch
+        # Add the 'parcheggio' column
+        pred['parcheggio'] = parcheggio
+        res.append(pred)
+    
+    for pred in res:
+        pred['point'] = (pred.index).astype('int')
+        pred['datetime'] = pred['point'].apply(to_point)
+        pred.drop(['point'], axis=1, inplace=True)
+    
+    all = pd.concat(res, ignore_index=True)[['predicted_mean', 'parcheggio', 'datetime']]
+    
+    USERNAME = context.get_secret('DB_USERNAME')
+    PASSWORD = context.get_secret('DB_PASSWORD')
+    engine = create_engine('postgresql://'+USERNAME+':'+PASSWORD+'@database-postgres-cluster/digitalhub')
+    all.to_sql('parkings_prediction', engine, if_exists="replace")
+    return
