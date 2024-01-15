@@ -36,6 +36,9 @@ def parkings_last_data(context):
         json_data = json.load(f)
         df_latest = pd.json_normalize(json_data['results']).drop(columns=['guid', 'occupazione']).rename(columns={"coordinate.lon": "lon", "coordinate.lat": "lat"})
 
+    # convert 'data' column to datetime
+    df_latest.data = df_latest.data.astype('datetime64')
+    
     # write data to database
     USERNAME = context.get_secret('DB_USERNAME')
     PASSWORD = context.get_secret('DB_PASSWORD')
