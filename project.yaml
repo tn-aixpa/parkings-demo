@@ -24,6 +24,9 @@ spec:
     kind: job
     image: mlrun/mlrun
     handler: parkings_last_data
+    requirements:
+    - sqlalchemy
+    - psycopg2-binary
   - url: src/parkings_to_db.py
     name: to-db
     kind: job
