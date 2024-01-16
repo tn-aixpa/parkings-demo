@@ -21,6 +21,10 @@ def to_db(context, agg_di: mlrun.DataItem, parkings_di: mlrun.DataItem):
     # Keep only last two calendar years
     date = datetime.date.today() - datetime.timedelta(days=365*2)
     agg_df = agg_df[agg_df['day'].dt.date >= date]
-    agg_df.to_sql("parking_data_aggregated", engine, if_exists="replace")
-    parkings_di.as_df().to_sql('parkings', engine, if_exists="replace")
+    with engine.connect() as connection: 
+        connection.execute("DELETE FROM parkings")
+        connection.execute("DELETE FROM parking_data_aggregated")
+
+    agg_df.to_sql("parking_data_aggregated", engine, if_exists="append")
+    parkings_di.as_df().to_sql('parkings', engine, if_exists="append")
     return

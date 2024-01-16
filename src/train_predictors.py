@@ -125,5 +125,6 @@ def predict_day(context, parkings_di: mlrun.DataItem):
     USERNAME = context.get_secret('DB_USERNAME')
     PASSWORD = context.get_secret('DB_PASSWORD')
     engine = create_engine('postgresql://'+USERNAME+':'+PASSWORD+'@database-postgres-cluster/digitalhub')
-    all.to_sql('parkings_prediction', engine, if_exists="replace")
+    with engine.connect() as connection: connection.execute("DELETE FROM parkings_prediction")
+    all.to_sql('parkings_prediction', engine, if_exists="append")
     return
