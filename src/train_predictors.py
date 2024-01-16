@@ -24,7 +24,7 @@ def to_point(point):
     today = datetime.datetime.today()
     return datetime.datetime(today.year, today.month, today.day, int(point * 30 / 60), int(point * 30 % 60))
 
-@mlrun.handler()
+@mlrun.handler(outputs=["parking_data_predicted"])
 def predict_day(context, parkings_di: mlrun.DataItem):
     """
     Predicts the occupancy of parking spaces for the next 48 steps and saves the results in a PostgreSQL database.
@@ -127,4 +127,4 @@ def predict_day(context, parkings_di: mlrun.DataItem):
     engine = create_engine('postgresql://'+USERNAME+':'+PASSWORD+'@database-postgres-cluster/digitalhub')
     with engine.connect() as connection: connection.execute("DELETE FROM parkings_prediction")
     all.to_sql('parkings_prediction', engine, if_exists="append")
-    return
+    return all
