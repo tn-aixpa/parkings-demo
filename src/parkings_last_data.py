@@ -43,5 +43,8 @@ def parkings_last_data(context):
     USERNAME = context.get_secret('DB_USERNAME')
     PASSWORD = context.get_secret('DB_PASSWORD')
     engine = create_engine('postgresql://'+USERNAME+':'+PASSWORD+'@database-postgres-cluster/digitalhub')
-    df_latest.to_sql('parkings_latest', engine, if_exists="replace")
+    with engine.connect() as connection:
+            connection.execute("DELETE FROM parkings_latest")
+            connection.commit()
+    df_latest.to_sql('parkings_latest', engine, if_exists="append")
     return df_latest
