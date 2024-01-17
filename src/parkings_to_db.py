@@ -22,8 +22,10 @@ def to_db(context, agg_di: mlrun.DataItem, parkings_di: mlrun.DataItem):
     date = datetime.date.today() - datetime.timedelta(days=365*2)
     agg_df = agg_df[agg_df['day'].dt.date >= date]
     with engine.connect() as connection: 
-        connection.execute("DELETE FROM parkings")
-        connection.execute("DELETE FROM parking_data_aggregated")
+        try: connection.execute("DELETE FROM parkings")
+        except: pass
+        try: connection.execute("DELETE FROM parking_data_aggregated")
+        except: pass
 
     agg_df.to_sql("parking_data_aggregated", engine, if_exists="append")
     parkings_di.as_df().to_sql('parkings', engine, if_exists="append")
