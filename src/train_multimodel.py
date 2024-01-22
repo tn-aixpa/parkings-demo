@@ -125,7 +125,7 @@ def train_model(context, parkings_di: mlrun.DataItem, window: int = 60,
             "split_ratio": split_ratio,
             "num_layers": multimodel.num_layers,
             "layer_widths": multimodel.layer_widths,
-            "activations": multimodel.activations
+            "activation": multimodel.activation
         },
         metrics = {
             "mape": mape(train_sets[0], pred),
