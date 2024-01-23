@@ -5,6 +5,7 @@ from darts import TimeSeries
 import pandas as pd
 from darts.models import NBEATSModel
 from zipfile import ZipFile
+import json
 
 class ParkingPredictorModel(mlrun.serving.V2ModelServer):
     def load(self):
@@ -31,8 +32,11 @@ class ParkingPredictorModel(mlrun.serving.V2ModelServer):
         - A list of model predictions.
         """
         # Create a TimeSeries from the input data
+        pdf = pd.DataFrame(body['inputs'])
+        pdf['date'] = pd.to_datetime(pdf['date'], unit='ms')
+
         ts = TimeSeries.from_dataframe(
-            pd.DataFrame(body['inputs']),
+            pdf,
             time_col="date",
             value_cols="value",
             freq="30min"
@@ -41,5 +45,8 @@ class ParkingPredictorModel(mlrun.serving.V2ModelServer):
         # Generate predictions using the model
         result = self.model.predict(12, series=ts)
 
-        # Convert the result to a pandas DataFrame, reset the index, and convert to a list of dictionaries
-        return result.pd_dataframe().reset_index().to_dict('records')
+        # Convert the result to a pandas DataFrame, reset the index, and convert to a list
+        jsonstr = result.pd_dataframe().reset_index().to_json(orient='records')
+        return json.loads(jsonstr)
+
+    
