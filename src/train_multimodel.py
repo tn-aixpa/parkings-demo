@@ -6,6 +6,7 @@ from darts import TimeSeries
 from darts.models import NBEATSModel
 from darts.metrics import mape, smape, mae
 from darts.dataprocessing.transformers import Scaler
+from zipfile import ZipFile
 
 import logging
 logging.disable(logging.CRITICAL)
@@ -113,10 +114,14 @@ def train_model(context, parkings_di: mlrun.DataItem, window: int = 60,
     multimodel.fit(train_sets)
     pred = multimodel.predict(n=output_chunk_length*2, series=train_sets[0][:-output_chunk_length*2])
 
+    multimodel.save("parcheggi_predictor_model.pt")
+    with ZipFile("parcheggi_predictor_model.pt.zip", "w") as z:
+        z.write("parcheggi_predictor_model.pt")
+        z.write("parcheggi_predictor_model.pt.ckpt")
+
     # log model to MLRun
     context.log_model(
         "parcheggi_predictor_model",
-        body=dumps(multimodel),
         parameters={
             "window": window,
             "input_chunk_length": input_chunk_length,
@@ -132,7 +137,7 @@ def train_model(context, parkings_di: mlrun.DataItem, window: int = 60,
             "smape": smape(train_sets[0], pred),
             "mae": mae(train_sets[0], pred)
         },
-        model_file="parcheggi_predictor_model.pkl",
+        model_file="parcheggi_predictor_model.pt.zip",
         labels={"class": "darts.models.NBEATSModel"},
         algorithm="darts.models.NBEATSModel",
         framework="darts"

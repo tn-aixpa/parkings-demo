@@ -44,6 +44,16 @@ spec:
     - sqlalchemy
     - psycopg2-binary
     - statsmodels
+  - url: src/train_multimodel.py
+    name: train-multimodel
+    kind: job
+    image: mlrun/mlrun
+    handler: train_model
+    requirements:
+    - darts==0.25.0
+    - pandas==1.4.4
+    - numpy==1.22.4
+    - patsy==0.5.2
   workflows:
   - path: ./src/data_update_pipeline.py
     name: data-update-pipeline
