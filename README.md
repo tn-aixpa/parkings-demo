@@ -46,3 +46,8 @@ create or replace view api.parkings_prediction as select * from public.parkings_
 The folder ``dashboards`` contains the dashboards that can be used for the visualization of the parking data. In particular
 
 - ``grafana_parkings.json`` defines a Grafana dashboard with the parking data. Import it in the grafana instance of interest and replace the UID of the ``digitalhub`` datasource with the one configured in your instance. 
+
+## 4. ML Model Training and Serving
+
+Based on the historical data collected the project allows for training a parking occupancy prediction model and expose it as a service. The training code 
+is managed by the ``train-multimodel`` operation (see ``src/train_multimodel.py`` for details) and creates a NBEATS DL global model using [darts](https://unit8co.github.io/) framework. The model is then deployed using Nuclio serverless platform with a custom service for this model to make predictions. The "parcheggi" contains the necessary details for declaring a serving functions, adding the trained model and deploying it on the platform using the custom server implementation (see ``predictor_serving.py`` for further details).
