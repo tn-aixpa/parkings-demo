@@ -19,14 +19,11 @@ spec:
     kind: job
     image: mlrun/mlrun
     handler: aggregate_parkings
-  - url: src/parkings_last_data.py
-    name: extract-parkings-latest
+  - url: src/monitor_predictor.py
+    name: monitor-predictor
     kind: job
     image: mlrun/mlrun
-    handler: parkings_last_data
-    requirements:
-    - sqlalchemy
-    - psycopg2-binary
+    handler: monitor_predictor
   - url: src/parkings_to_db.py
     name: to-db
     kind: job
@@ -54,14 +51,22 @@ spec:
     - pandas==1.4.4
     - numpy==1.22.4
     - patsy==0.5.2
+  - url: src/parkings_last_data.py
+    name: parkings-rt
+    kind: job
+    image: mlrun/mlrun
+    handler: parkings_last_data
+    requirements:
+    - sqlalchemy
+    - psycopg2-binary
   workflows:
   - path: ./src/data_update_pipeline.py
     name: data-update-pipeline
     handler: pipeline
   artifacts: []
   conda: ''
-  source: git://gitlab.hpc.cineca.it/dt-data-projects/gdb-project-parkings.git
-  origin_url: git://github.com/scc-digitalhub/gdb-project-parkings.git#refs/heads/main
+  source: git://gitlab.hpc.cineca.it/dt-data-projects/gdb-project-parkings.git#refs/heads/main
+  origin_url: git://gitlab.hpc.cineca.it/dt-data-projects/gdb-project-parkings.git#refs/heads/main
   load_source_on_run: false
   desired_state: online
   build:
