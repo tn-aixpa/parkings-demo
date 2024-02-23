@@ -6,7 +6,7 @@ import pandas as pd
 
 @mlrun.handler()
 def monitor_predictor(context):
-    project = mlrun.get_current_project()
+    project = context.get_project_object()
 
     serving_fn = project.get_function('serving-predictor')
 
