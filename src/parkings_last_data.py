@@ -44,7 +44,7 @@ def parkings_last_data(context):
     PASSWORD = context.get_secret('DB_PASSWORD')
     engine = create_engine('postgresql://'+USERNAME+':'+PASSWORD+'@database-postgres-cluster/digitalhub')
     with engine.connect() as connection: 
-        try: connection.execute("DELETE FROM parkings_latest") 
+        try: connection.execute("DELETE FROM parkings_latest where data >= '" + str(parkings_last_data().min().data) + "' and data < '" + date_str + "'") 
         except: pass
 
     df_latest.to_sql('parkings_latest', engine, if_exists="append")
