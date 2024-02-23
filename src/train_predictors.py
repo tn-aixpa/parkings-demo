@@ -130,4 +130,11 @@ def predict_day(context, parkings_di: mlrun.DataItem):
         except: pass
 
     all.to_sql('parkings_prediction', engine, if_exists="append")
+
+    old_pd = all
+    try: 
+        dat_old = mlrun.get_dataitem('store://datasets/parcheggi/parking_prediction_sarima_model')
+        old_pd = pd.concat([dat_old.as_df(), all], ignore_index=True)
+    except: pass
+    context.log_dataset('parking_prediction_sarima_model', old_pd, stats=True)
     return all
