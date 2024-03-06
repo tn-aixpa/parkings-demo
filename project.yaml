@@ -1,7 +1,7 @@
 kind: project
 metadata:
   name: parcheggi
-  created: '2023-12-21T16:37:58.071000'
+  created: '2024-03-06T14:17:06.627000'
 spec:
   functions:
   - url: src/download-all.py
@@ -63,10 +63,13 @@ spec:
   - path: ./src/data_update_pipeline.py
     name: data-update-pipeline
     handler: pipeline
+  - path: ./src/parking_data_pipeline.py
+    name: parking-data-pipeline
+    handler: parking_pipeline
   artifacts: []
   conda: ''
-  source: git://gitlab.hpc.cineca.it/dt-data-projects/gdb-project-parkings.git#refs/heads/main
-  origin_url: git://gitlab.hpc.cineca.it/dt-data-projects/gdb-project-parkings.git#refs/heads/main
+  source: git://github.com/scc-digitalhub/gdb-project-parkings.git#refs/heads/main
+  origin_url: git://github.com/scc-digitalhub/gdb-project-parkings.git#refs/heads/main
   load_source_on_run: false
   desired_state: online
   build:
