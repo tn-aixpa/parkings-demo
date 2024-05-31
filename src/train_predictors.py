@@ -52,7 +52,7 @@ def predict_day(context, parkings_di: mlrun.DataItem):
     df_clean['occupied'] = df_clean.posti_occupati / df_clean.posti_totali
 
     # Round the 'data' column to the nearest 30 minutes
-    df_clean['date_time_slice'] = df_clean.data.dt.round('30min')
+    df_clean['date_time_slice'] = df_clean.data.dt.round('30min').dt.tz_convert(None)
 
     # Extract the date from the 'data' column
     df_clean['date'] = df_clean.data.dt.date

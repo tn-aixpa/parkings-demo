@@ -72,9 +72,9 @@ def train_model(context, parkings_di: mlrun.DataItem, window: int = 60,
 
     # Clean the data
     df_clean = df_source.copy()
-    df_clean.data = df_clean.data.astype('datetime64[ms, UTC]')
+    df_clean.data = pd.to_datetime(df_clean.data, utc=True)# df_clean.data.astype('datetime64[ms, UTC]')
     df_clean['occupied'] = df_clean.posti_occupati / df_clean.posti_totali
-    df_clean['date_time_slice'] = df_clean.data.dt.round('30min')
+    df_clean['date_time_slice'] = df_clean.data.dt.round('30min').dt.tz_convert(None)
     df_clean = df_clean[df_clean.date_time_slice >= (datetime.datetime.today() - pd.DateOffset(window))]
     df_clean = df_clean[df_clean.date_time_slice <= (datetime.datetime.today() - pd.DateOffset(1))]
     df_clean.posti_occupati = df_clean.apply(lambda x: max(0, min(x['posti_totali'], x['posti_occupati'])), axis=1)
