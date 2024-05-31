@@ -1,4 +1,4 @@
-# GDB: Parking Data
+# Parking Data
 
 The project aims at elaborating the parking data, creating the necessary datasets, visualizations, and services for historical, actual, and forecasted parking data.
 
