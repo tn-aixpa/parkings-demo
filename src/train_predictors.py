@@ -55,7 +55,7 @@ def predict_day(context, parkings_di: mlrun.DataItem):
     df_clean['date_time_slice'] = df_clean.data.dt.round('30min').dt.tz_convert(None)
 
     # Extract the date from the 'data' column
-    df_clean['date'] = df_clean.data.dt.date
+    df_clean['date'] = df_clean.data.dt.date.dt.tz_convert(None)
 
     # Filter out data from the last 30 days
     df_clean = df_clean[df_clean.date_time_slice >= (datetime.datetime.today() - pd.DateOffset(30))]
