@@ -47,7 +47,7 @@ def monitor_predictor(context):
         with open(latest_data_file) as f:
             json_data = json.load(f)
             df_latest = pd.json_normalize(json_data['results']).drop(columns=['guid', 'occupazione']).rename(columns={"coordinate.lon": "lon", "coordinate.lat": "lat"})
-            df_latest.data = df_latest.data.astype('datetime64')
+            df_latest.data = df_latest.data.astype('datetime64[ms, UTC]')
             df_latest['value'] = df_latest.posti_occupati / df_latest.posti_totali
             df_latest['date'] = df_latest.data.dt.round('30min')
             df_latest = df_latest.drop(columns=['parcheggio'])
@@ -58,7 +58,7 @@ def monitor_predictor(context):
         arr = json.loads(jsonstr)
         res = serving_fn.invoke(path="/v2/models/parcheggi_predictor_model/infer", body={"inputs": arr})
         res_df = pd.DataFrame(res['outputs'])
-        res_df['datetime'] = res_df['date'].astype('datetime64[ms]')
+        res_df['datetime'] = res_df['date'].astype('datetime64[ms, UTC]')
         res_df['parcheggio'] = parking_str
         res_df['predicted_mean'] = res_df['value']
         res_df = res_df.drop(columns=['date', 'value'])

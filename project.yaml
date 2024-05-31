@@ -1,7 +1,7 @@
 kind: project
 metadata:
   name: parcheggi
-  created: '2024-03-06T14:17:06.627000'
+  created: '2024-05-31T13:37:28.507000'
 spec:
   functions:
   - url: src/download-all.py
@@ -68,8 +68,8 @@ spec:
     handler: parking_pipeline
   artifacts: []
   conda: ''
-  source: git://github.com/scc-digitalhub/gdb-project-parkings.git#refs/heads/main
-  origin_url: git://github.com/scc-digitalhub/gdb-project-parkings.git#refs/heads/main
+  source: git://github.com/tn-aixpa/parkings-demo#refs/heads/main
+  origin_url: git://github.com/tn-aixpa/parkings-demo#refs/heads/main
   load_source_on_run: false
   desired_state: online
   build:

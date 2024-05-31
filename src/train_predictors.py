@@ -46,7 +46,7 @@ def predict_day(context, parkings_di: mlrun.DataItem):
     df_clean = df_clean.drop(columns=['lat', 'lon'])
 
     # Convert 'data' column to datetime
-    df_clean.data = df_clean.data.astype('datetime64')
+    df_clean.data = df_clean.data.astype('datetime64[ms, UTC]')
 
     # Calculate the occupancy rate
     df_clean['occupied'] = df_clean.posti_occupati / df_clean.posti_totali

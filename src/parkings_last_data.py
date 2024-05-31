@@ -37,11 +37,12 @@ def parkings_last_data(context):
         df_latest = pd.json_normalize(json_data['results']).drop(columns=['guid', 'occupazione']).rename(columns={"coordinate.lon": "lon", "coordinate.lat": "lat"})
 
     # convert 'data' column to datetime
-    df_latest.data = df_latest.data.astype('datetime64')
+    df_latest.data = df_latest.data.astype('datetime64[ms, UTC]')
     
     # write data to database
     USERNAME = context.get_secret('DB_USERNAME')
     PASSWORD = context.get_secret('DB_PASSWORD')
+    print('USERNAME', USERNAME)
     engine = create_engine('postgresql://'+USERNAME+':'+PASSWORD+'@database-postgres-cluster/digitalhub')
     with engine.connect() as connection: 
         try: connection.execute("DELETE FROM parkings_latest where data >= '" + str(parkings_last_data().min().data) + "' and data < '" + date_str + "'") 
