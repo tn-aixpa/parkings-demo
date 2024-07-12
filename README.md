@@ -7,17 +7,10 @@ The project aims at elaborating the parking data, creating the necessary dataset
 The data management consists of the following activities
 - download the historical data and create the dataset on the platform Datalake
 - aggregate the data according by the calendar day and parking for further analysis, saving the dataset in the Datalake and in the database
-- continuously download and update the latest data to have it available in the DB for exposure as API and visualizations
-- process data in order to create forecast models for the parkings and continously predict the occupation rate for the next 24 hours
 
-The data management operations are captured by the two procedures:
-- "extract-parkings-latest": download the latest data and store it in datalake and PostgreSQL DB. The operation is scheduled eacvh 10 minutes.
-- "data-update-pipeline": a pipeline that downloads the storical data, aggregates it, extract the basic parking info, creates the predicition models and applies them to forecast next day data. The created data (parkings, aggregated occupation, forecast) is stored in the datalake and DB. The pipeline is then scheduled for execution every day.
+The data management operations are defined with the "parkings-pipeline" procedure: a pipeline that downloads the storical data, aggregates it, extract the basic parking info. The created data (parkings, aggregated occupation) is stored in the datalake and DB. 
 
-To run / schedule the procedures it is possible to follow the "parcheggi" Jupyter notebook. Please note that
-to work with the associated source code it is necessary to provide a set of secrets, specifically
-- the ``GIT_TOKEN`` to access the private repo to clone the code (necessary also for executions)
-- the ``DB_USERNAME`` and ``DB_PASSWORD`` to write the data to the database. 
+The notebooks demonstrate the functionality of the platform.
 
 ## 2. Data Services
 
@@ -34,10 +27,8 @@ create schema if not exists api;
 ```sql
 create or replace view api.parkings as select * from public.parkings;
 create or replace view api.parking_data_aggregated as select * from public.parking_data_aggregated;
-create or replace view api.parkings_latest as select * from public.parkings_latest;
-create or replace view api.parkings_prediction as select * from public.parkings_prediction;
 ```
-- create a PostgreSQL instance using the [KRM UI](https://scc-digitalhub.github.io/docs/tasks/resources/#managing-postgrest-data-services-with-krm). Specify ``api`` as exposed schema and an appropriate user (e.g., default read-only user for the ``digitalhub`` database).
+- create a PostgREST instance using the [KRM UI](https://scc-digitalhub.github.io/docs/tasks/resources/#managing-postgrest-data-services-with-krm). Specify ``api`` as exposed schema and an appropriate user (e.g., default read-only user for the ``digitalhub`` database).
 
 - expose the service using API Gateway in [KRM](https://scc-digitalhub.github.io/docs/tasks/resources/#exposing-services-externally)). To access the data represented in the specific view, use the calls ``<host>/<view_name>``. Please take into account that the propagation of the DNS name may require some time. 
 
