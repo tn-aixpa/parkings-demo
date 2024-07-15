@@ -95,4 +95,17 @@ def train_model(project, parkings_di,n_epochs: int = 1, window: int = 60,
     with ZipFile("parcheggi_predictor_model.pt.zip", "w") as z:
         z.write("parcheggi_predictor_model.pt")
         z.write("parcheggi_predictor_model.pt.ckpt")
-    project.log_model(name="modello_parcheggi", kind="model", source_path="parcheggi_predictor_model.pt.zip")
+    metrics = {
+        "mape": mape(train_sets[0], pred),
+        "smape": smape(train_sets[0], pred),
+        "mae": mae(train_sets[0], pred)
+    }
+
+    project.log_model(
+        name="modello_parcheggi", 
+        kind="model", 
+        source_path="parcheggi_predictor_model.pt.zip", 
+        algorithm="darts.models.NBEATSModel",
+        framework="darts",
+        metrics=metrics
+    )
