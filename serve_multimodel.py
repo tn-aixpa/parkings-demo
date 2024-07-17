@@ -10,7 +10,7 @@ def init(context):
     model_name = "modello_parcheggi"
 
     # prendi l'entity model sulla base del nome
-    model = context.project.get_model(entity_name=model_name)
+    model = context.project.get_model(model_name)
     path = model.download()
     local_path_model = "extracted_model/"
     # Qua fai unzip immagino

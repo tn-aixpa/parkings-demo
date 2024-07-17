@@ -7,8 +7,8 @@ import os
 
 @handler()
 def to_db(project, agg_di , parkings_di ):
-    USERNAME = os.getenv("POSTGRES_USER")#project.get_secret(entity_name='DB_USERNAME').read_secret_value()
-    PASSWORD = os.getenv("POSTGRES_PASSWORD")#project.get_secret(entity_name='DB_PASSWORD').read_secret_value()
+    USERNAME = os.getenv("POSTGRES_USER")
+    PASSWORD = os.getenv("POSTGRES_PASSWORD")
     engine = create_engine('postgresql+psycopg2://'+USERNAME+':'+PASSWORD+'@database-postgres-cluster/digitalhub')
     
     agg_df = agg_di.as_df(file_format="parquet")
