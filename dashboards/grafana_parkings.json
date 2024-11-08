@@ -1,4 +1,46 @@
 {
+  "__inputs": [
+    {
+      "name": "VAR_ID",
+      "type": "constant",
+      "label": "datasource Id",
+      "value": "d3eb816d-a7fd-4a8d-bf5c-18530183fa4a",
+      "description": ""
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "geomap",
+      "name": "Geomap",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.0.2"
+    },
+    {
+      "type": "datasource",
+      "id": "postgres",
+      "name": "PostgreSQL",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -18,14 +60,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": null,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "postgres",
-        "uid": "fc3217b4-eb19-42a9-b395-9006d00265aa"
+        "uid": "$id"
       },
       "description": "",
       "fieldConfig": {
@@ -131,12 +173,12 @@
           "zoom": 14
         }
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.0.2",
       "targets": [
         {
           "datasource": {
             "type": "postgres",
-            "uid": "fc3217b4-eb19-42a9-b395-9006d00265aa"
+            "uid": "$id"
           },
           "editorMode": "builder",
           "format": "table",
@@ -200,7 +242,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "fc3217b4-eb19-42a9-b395-9006d00265aa"
+        "uid": "$id"
       },
       "description": "",
       "fieldConfig": {
@@ -253,12 +295,12 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.1.5",
+      "pluginVersion": "10.0.2",
       "targets": [
         {
           "datasource": {
             "type": "postgres",
-            "uid": "fc3217b4-eb19-42a9-b395-9006d00265aa"
+            "uid": "$id"
           },
           "editorMode": "code",
           "format": "table",
@@ -334,7 +376,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "fc3217b4-eb19-42a9-b395-9006d00265aa"
+        "uid": "$id"
       },
       "fieldConfig": {
         "defaults": {
@@ -355,7 +397,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -414,13 +455,13 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "fc3217b4-eb19-42a9-b395-9006d00265aa"
+            "uid": "$id"
           },
           "editorMode": "code",
           "format": "time_series",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT $__timeGroup(day, '5m'), posti_liberi as \"storico posti liberi\", parcheggio FROM parking_data_aggregated WHERE parcheggio = '$parcking' ",
+          "rawSql": "SELECT $__timeGroup(day, '5m') AS time, posti_liberi as \"storico posti liberi\", parcheggio FROM parking_data_aggregated WHERE parcheggio = '$parcking' ORDER BY time ASC",
           "refId": "A",
           "sql": {
             "columns": [
@@ -465,7 +506,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "fc3217b4-eb19-42a9-b395-9006d00265aa"
+            "uid": "$id"
           },
           "editorMode": "code",
           "format": "table",
@@ -494,7 +535,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "fc3217b4-eb19-42a9-b395-9006d00265aa"
+            "uid": "$id"
           },
           "editorMode": "code",
           "format": "table",
@@ -541,14 +582,10 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": true,
-          "text": "Autostazione",
-          "value": "Autostazione"
-        },
+        "current": {},
         "datasource": {
           "type": "postgres",
-          "uid": "fc3217b4-eb19-42a9-b395-9006d00265aa"
+          "uid": "$id"
         },
         "definition": "select parcheggio from parkings",
         "hide": 0,
@@ -563,6 +600,26 @@
         "skipUrlSync": false,
         "sort": 1,
         "type": "query"
+      },
+      {
+        "hide": 2,
+        "label": "datasource Id",
+        "name": "id",
+        "query": "${VAR_ID}",
+        "skipUrlSync": false,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_ID}",
+          "text": "${VAR_ID}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_ID}",
+            "text": "${VAR_ID}",
+            "selected": false
+          }
+        ]
       }
     ]
   },
@@ -573,7 +630,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Parcheggi Bologna",
-  "uid": "d23bc689-2718-45d9-a541-3127d823f18d",
-  "version": 26,
+  "uid": "d3eb816d-a7fd-4a8d-bf5c-18530183fa4a",
+  "version": 17,
   "weekStart": ""
 }
