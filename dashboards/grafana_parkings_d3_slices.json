@@ -25,7 +25,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "d3eb816d-a7fd-4a8d-bf5c-18530183fa4a"
+        "uid": "$id"
       },
       "fieldConfig": {
         "defaults": {
@@ -103,7 +103,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "d3eb816d-a7fd-4a8d-bf5c-18530183fa4a"
+            "uid": "$id"
           },
           "editorMode": "code",
           "format": "table",
@@ -230,7 +230,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "d3eb816d-a7fd-4a8d-bf5c-18530183fa4a"
+            "uid": "$id"
           },
           "editorMode": "code",
           "format": "table",
@@ -317,7 +317,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "Parcheggio-Bologna-d3(prediction vs dati reali)",
-  "uid": "a2311eae-2978-456e-b213-b97c28873996",
   "version": 44,
   "weekStart": ""
 }
