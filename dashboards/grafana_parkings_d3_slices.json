@@ -18,26 +18,48 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 7,
+  "id": 10,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "postgres",
-        "uid": "$id"
+        "uid": "d3eb816d-a7fd-4a8d-bf5c-18530183fa4a"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
             }
           },
           "mappings": [],
@@ -58,217 +80,39 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
-        "w": 12,
+        "h": 11,
+        "w": 24,
         "x": 0,
-        "y": 0
-      },
-      "id": 1,
-      "options": {
-        "basemap": {
-          "config": {},
-          "name": "Layer 0",
-          "type": "default"
-        },
-        "controls": {
-          "mouseWheelZoom": true,
-          "showAttribution": true,
-          "showDebug": false,
-          "showMeasure": false,
-          "showScale": false,
-          "showZoom": true
-        },
-        "layers": [
-          {
-            "config": {
-              "showLegend": true,
-              "style": {
-                "color": {
-                  "fixed": "dark-green"
-                },
-                "opacity": 0.4,
-                "rotation": {
-                  "fixed": 0,
-                  "max": 360,
-                  "min": -360,
-                  "mode": "mod"
-                },
-                "size": {
-                  "fixed": 5,
-                  "max": 15,
-                  "min": 2
-                },
-                "symbol": {
-                  "fixed": "img/icons/marker/triangle.svg",
-                  "mode": "fixed"
-                },
-                "textConfig": {
-                  "fontSize": 12,
-                  "offsetX": 0,
-                  "offsetY": 0,
-                  "textAlign": "center",
-                  "textBaseline": "middle"
-                }
-              }
-            },
-            "filterData": {
-              "id": "byRefId",
-              "options": "A"
-            },
-            "name": "Parcheggi",
-            "tooltip": true,
-            "type": "markers"
-          }
-        ],
-        "tooltip": {
-          "mode": "details"
-        },
-        "view": {
-          "allLayers": true,
-          "id": "coords",
-          "lat": 44.498334816519304,
-          "lon": 11.342189910769283,
-          "zoom": 14
-        }
-      },
-      "pluginVersion": "10.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "postgres",
-            "uid": "$id"
-          },
-          "editorMode": "builder",
-          "format": "table",
-          "rawSql": "SELECT lat, lon, parcheggio, posti_totali FROM parkings LIMIT 50 ",
-          "refId": "A",
-          "sql": {
-            "columns": [
-              {
-                "parameters": [
-                  {
-                    "name": "lat",
-                    "type": "functionParameter"
-                  }
-                ],
-                "type": "function"
-              },
-              {
-                "parameters": [
-                  {
-                    "name": "lon",
-                    "type": "functionParameter"
-                  }
-                ],
-                "type": "function"
-              },
-              {
-                "parameters": [
-                  {
-                    "name": "parcheggio",
-                    "type": "functionParameter"
-                  }
-                ],
-                "type": "function"
-              },
-              {
-                "parameters": [
-                  {
-                    "name": "posti_totali",
-                    "type": "functionParameter"
-                  }
-                ],
-                "type": "function"
-              }
-            ],
-            "groupBy": [
-              {
-                "property": {
-                  "type": "string"
-                },
-                "type": "groupBy"
-              }
-            ],
-            "limit": 50
-          },
-          "table": "parkings"
-        }
-      ],
-      "title": "Mappa parcheggi",
-      "type": "geomap"
-    },
-    {
-      "datasource": {
-        "type": "postgres",
-        "uid": "$id"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-RdYlGr"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "mode": "basic",
-              "type": "color-background"
-            },
-            "inspect": false,
-            "minWidth": 50
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 13,
-        "w": 12,
-        "x": 12,
         "y": 0
       },
       "id": 3,
       "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
         },
-        "showHeader": true
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "10.0.2",
       "targets": [
         {
           "datasource": {
             "type": "postgres",
-            "uid": "$id"
+            "uid": "d3eb816d-a7fd-4a8d-bf5c-18530183fa4a"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT  hour, dow, AVG(posti_liberi) as posti FROM parking_data_aggregated where parcheggio = '$parcking'  GROUP BY hour, dow order by dow, hour",
+          "rawSql": "SELECT $__timeGroup(data, $__interval),posti_liberi as \"posti liberi attuali\",parcheggio FROM parkings_latest where parcheggio = '$parcking' \r\n",
           "refId": "A",
           "sql": {
             "columns": [
               {
-                "name": "AVG",
                 "parameters": [
                   {
                     "name": "posti_liberi",
@@ -280,16 +124,7 @@
               {
                 "parameters": [
                   {
-                    "name": "hour",
-                    "type": "functionParameter"
-                  }
-                ],
-                "type": "function"
-              },
-              {
-                "parameters": [
-                  {
-                    "name": "dow",
+                    "name": "data",
                     "type": "functionParameter"
                   }
                 ],
@@ -299,14 +134,6 @@
             "groupBy": [
               {
                 "property": {
-                  "name": "hour",
-                  "type": "string"
-                },
-                "type": "groupBy"
-              },
-              {
-                "property": {
-                  "name": "dow",
                   "type": "string"
                 },
                 "type": "groupBy"
@@ -314,22 +141,11 @@
             ],
             "limit": 50
           },
-          "table": "parking_data_aggregated"
+          "table": "parkings_latest"
         }
       ],
-      "title": "Occupazione",
-      "transformations": [
-        {
-          "id": "groupingToMatrix",
-          "options": {
-            "columnField": "dow",
-            "emptyValue": "empty",
-            "rowField": "hour",
-            "valueField": "posti"
-          }
-        }
-      ],
-      "type": "table"
+      "title": "Posti liberi attuali",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -389,10 +205,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 13,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 11
       },
       "id": 2,
       "interval": "1h",
@@ -413,68 +229,16 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "$id"
+            "uid": "d3eb816d-a7fd-4a8d-bf5c-18530183fa4a"
           },
           "editorMode": "code",
-          "format": "time_series",
-          "hide": false,
+          "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT $__timeGroup(day, '5m') AS time, posti_liberi as \"storico posti liberi\", parcheggio FROM parking_data_aggregated WHERE parcheggio = '$parcking' ORDER BY time ASC",
+          "rawSql": "SELECT $__timeGroup(pp.datetime, $__interval) as time, pp.slice_datetime as slice, pp.parcheggio, p.posti_totali-pp.predicted_mean*p.posti_totali as \"previsione liberi Nbeats\" FROM parkings_prediction_nbeats_sliced pp inner join parkings p on pp.parcheggio = p.parcheggio WHERE pp.parcheggio = '$parcking'\r\norder by time\r\n",
           "refId": "A",
           "sql": {
             "columns": [
               {
-                "parameters": [
-                  {
-                    "name": "day",
-                    "type": "functionParameter"
-                  }
-                ],
-                "type": "function"
-              },
-              {
-                "parameters": [
-                  {
-                    "name": "posti_liberi",
-                    "type": "functionParameter"
-                  }
-                ],
-                "type": "function"
-              },
-              {
-                "parameters": [
-                  {
-                    "name": "parcheggio",
-                    "type": "functionParameter"
-                  }
-                ],
-                "type": "function"
-              }
-            ],
-            "groupBy": [],
-            "limit": 50,
-            "whereJsonTree": {
-              "children1": [],
-              "id": "b8a8b989-89ab-4cde-b012-318c91d814e1",
-              "type": "group"
-            }
-          },
-          "table": "parking_data_aggregated"
-        },
-        {
-          "datasource": {
-            "type": "postgres",
-            "uid": "$id"
-          },
-          "editorMode": "code",
-          "format": "table",
-          "hide": false,
-          "rawQuery": true,
-          "rawSql": "SELECT $__timeGroup(pp.datetime, '5m'), pp.parcheggio, p.posti_totali-pp.predicted_mean*p.posti_totali as \"previsione liberi sarimax\" \r\nFROM parkings_prediction pp inner join parkings p on pp.parcheggio = p.parcheggio WHERE pp.parcheggio = '$parcking' ",
-          "refId": "B",
-          "sql": {
-            "columns": [
-              {
                 "parameters": [],
                 "type": "function"
               }
@@ -489,109 +253,19 @@
             ],
             "limit": 50
           }
-        },
-        {
-          "datasource": {
-            "type": "postgres",
-            "uid": "$id"
-          },
-          "editorMode": "code",
-          "format": "table",
-          "hide": false,
-          "rawQuery": true,
-          "rawSql": "SELECT $__timeGroup(data, '20m'),posti_liberi as \"posti liberi attuali\",parcheggio FROM parkings_latest where parcheggio = '$parcking' \n",
-          "refId": "C",
-          "sql": {
-            "columns": [
-              {
-                "parameters": [
-                  {
-                    "name": "posti_liberi",
-                    "type": "functionParameter"
-                  }
-                ],
-                "type": "function"
-              }
-            ],
-            "groupBy": [
-              {
-                "property": {
-                  "type": "string"
-                },
-                "type": "groupBy"
-              }
-            ],
-            "limit": 50
-          },
-          "table": "parkings_latest"
-        },
-        {
-          "datasource": {
-            "type": "postgres",
-            "uid": "$id"
-          },
-          "editorMode": "code",
-          "format": "table",
-          "hide": false,
-          "rawQuery": true,
-          "rawSql": "SELECT $__timeGroup(pp.datetime, '5m') as time, pp.parcheggio, p.posti_totali-pp.predicted_mean*p.posti_totali as \"previsione liberi Nbeats\"\r\nFROM parkings_prediction_nbeats pp inner join parkings p on pp.parcheggio = p.parcheggio WHERE pp.parcheggio = '$parcking' ORDER BY time asc",
-          "refId": "D",
-          "sql": {
-            "columns": [
-              {
-                "parameters": [],
-                "type": "function"
-              }
-            ],
-            "groupBy": [
-              {
-                "property": {
-                  "type": "string"
-                },
-                "type": "groupBy"
-              }
-            ],
-            "limit": 50
-          }
-        },
-        {
-          "datasource": {
-            "type": "postgres",
-            "uid": "$id"
-          },
-          "editorMode": "code",
-          "format": "table",
-          "hide": false,
-          "rawQuery": true,
-          "rawSql": "SELECT $__timeGroup(pp.slice_datetime, '5m'), pp.parcheggio, p.posti_totali-pp.predicted_mean*p.posti_totali as \"previsione liberi Nbeats slice\" FROM parkings_prediction_nbeats_sliced pp inner join parkings p on pp.parcheggio = p.parcheggio WHERE pp.parcheggio = '$parcking' \r\nORDER BY pp.slice_datetime",
-          "refId": "E",
-          "sql": {
-            "columns": [
-              {
-                "parameters": [
-                  {
-                    "name": "predicted_mean",
-                    "type": "functionParameter"
-                  }
-                ],
-                "type": "function"
-              }
-            ],
-            "groupBy": [
-              {
-                "property": {
-                  "type": "string"
-                },
-                "type": "groupBy"
-              }
-            ],
-            "limit": 50
-          },
-          "table": "parkings_prediction_nbeats_sliced"
         }
       ],
-      "title": "Posti liberi",
-      "transformations": [],
+      "title": "Slice Predictions",
+      "transformations": [
+        {
+          "id": "partitionByValues",
+          "options": {
+            "fields": [
+              "slice"
+            ]
+          }
+        }
+      ],
       "type": "timeseries"
     }
   ],
@@ -636,13 +310,13 @@
     ]
   },
   "time": {
-    "from": "now-5m",
-    "to": "now"
+    "from": "2024-11-16T07:29:00.000Z",
+    "to": "2024-11-16T14:49:00.000Z"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Parcheggio-Bologna-d3(slices)",
   "uid": "a2311eae-2978-456e-b213-b97c28873996",
-  "version": 10,
+  "version": 21,
   "weekStart": ""
 }
