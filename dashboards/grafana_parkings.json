@@ -1,46 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "VAR_ID",
-      "type": "constant",
-      "label": "datasource Id",
-      "value": "d3eb816d-a7fd-4a8d-bf5c-18530183fa4a",
-      "description": ""
-    }
-  ],
-  "__elements": {},
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "geomap",
-      "name": "Geomap",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "10.0.2"
-    },
-    {
-      "type": "datasource",
-      "id": "postgres",
-      "name": "PostgreSQL",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -60,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
+  "id": 3,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -461,7 +419,7 @@
           "format": "time_series",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT $__timeGroup(day, '5m') AS time, posti_liberi as \"storico posti liberi\", parcheggio FROM parking_data_aggregated WHERE parcheggio = '$parcking' ORDER BY time ASC",
+          "rawSql": "SELECT $__timeGroup(day, $__interval) AS time,\r\n       posti_liberi as \"storico posti liberi\",\r\n       parcheggio\r\nFROM parking_data_aggregated WHERE parcheggio = '$parcking' ORDER BY time ASC",
           "refId": "A",
           "sql": {
             "columns": [
@@ -512,7 +470,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT $__timeGroup(pp.datetime, '5m'), pp.parcheggio, p.posti_totali-pp.predicted_mean*p.posti_totali as \"previsione liberi\" FROM parkings_prediction pp inner join parkings p on pp.parcheggio = p.parcheggio WHERE pp.parcheggio = '$parcking' ",
+          "rawSql": "SELECT $__timeGroup(pp.datetime, $__interval), \r\n       pp.parcheggio,\r\n       p.posti_totali-pp.predicted_mean*p.posti_totali as \"previsione liberi (SARIMAX)\"\r\nFROM parkings_prediction pp inner join parkings p on pp.parcheggio = p.parcheggio WHERE pp.parcheggio = '$parcking' ",
           "refId": "B",
           "sql": {
             "columns": [
@@ -541,7 +499,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT $__timeGroup(data, '20m'),posti_liberi as \"posti liberi attuali\",parcheggio FROM parkings_latest where parcheggio = '$parcking' \n",
+          "rawSql": "SELECT $__timeGroup(data, $__interval),\n       posti_liberi as \"posti liberi attuali\",\n       parcheggio\nFROM parkings_latest where parcheggio = '$parcking' \n",
           "refId": "C",
           "sql": {
             "columns": [
@@ -582,7 +540,11 @@
   "templating": {
     "list": [
       {
-        "current": {},
+        "current": {
+          "selected": false,
+          "text": "Autostazione",
+          "value": "Autostazione"
+        },
         "datasource": {
           "type": "postgres",
           "uid": "$id"
@@ -605,32 +567,20 @@
         "hide": 2,
         "label": "datasource Id",
         "name": "id",
-        "query": "${VAR_ID}",
+        "query": "d3eb816d-a7fd-4a8d-bf5c-18530183fa4a",
         "skipUrlSync": false,
-        "type": "constant",
-        "current": {
-          "value": "${VAR_ID}",
-          "text": "${VAR_ID}",
-          "selected": false
-        },
-        "options": [
-          {
-            "value": "${VAR_ID}",
-            "text": "${VAR_ID}",
-            "selected": false
-          }
-        ]
+        "type": "constant"
       }
     ]
   },
   "time": {
-    "from": "now/d-48h",
-    "to": "now/d"
+    "from": "now-6h",
+    "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Parcheggi Bologna",
   "uid": "d3eb816d-a7fd-4a8d-bf5c-18530183fa4a",
-  "version": 17,
+  "version": 2,
   "weekStart": ""
 }
