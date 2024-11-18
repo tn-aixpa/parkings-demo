@@ -144,7 +144,7 @@
           "table": "parkings_latest"
         }
       ],
-      "title": "Posti liberi attuali",
+      "title": "Dati reali",
       "type": "timeseries"
     },
     {
@@ -155,7 +155,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "fixedColor": "blue",
+            "mode": "fixed"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -173,7 +174,7 @@
             },
             "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 5,
+            "pointSize": 1,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -210,14 +211,14 @@
         "x": 0,
         "y": 11
       },
-      "id": 2,
+      "id": 4,
       "interval": "1h",
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
           "mode": "single",
@@ -310,13 +311,13 @@
     ]
   },
   "time": {
-    "from": "2024-11-16T07:29:00.000Z",
+    "from": "2024-11-15T07:29:00.000Z",
     "to": "2024-11-16T14:49:00.000Z"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Parcheggio-Bologna-d3(slices)",
+  "title": "Parcheggio-Bologna-d3(prediction vs dati reali)",
   "uid": "a2311eae-2978-456e-b213-b97c28873996",
-  "version": 21,
+  "version": 44,
   "weekStart": ""
 }
