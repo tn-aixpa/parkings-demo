@@ -33,9 +33,17 @@ The folder ``dashboards`` contains the dashboards that can be used for the visua
 
 - ``grafana_parkings.json`` defines a Grafana dashboard with the parking data. Import it in the grafana instance of interest and configure the variable Id in ``Settings`` panel which corresponds to the Id of ``digitalhub`` datasource of your instance.
 
+  ![image](https://github.com/user-attachments/assets/9feede16-13a2-4f88-bffd-5d1301d808c7)
+
 - ``grafana_parkings_d2.json`` defines a Grafana dashboard with the parking data and graph panel to draw comparision among different predictions and acutal data. Import it in the grafana instance of interest and configure the variable Id in ``Settings`` panel which corresponds to the Id of ``digitalhub`` datasource of your instance.
 
-- ``grafana_parkings_d3_slices`` defines a Grafana dashboard with the parking data and a graph panel that draw specific comparison of predictions generated using deep learning approach at different time slices and acutal data depicting how accurate are the predictions indicated with blue lines with actual data indicated with green line. Import it in the grafana instance of interest and configure the variable Id in ``Settings`` panel which corresponds to the Id ``digitalhub`` datasource of your instance. 
+  ![image](https://github.com/user-attachments/assets/c4979bc0-368c-482d-b689-09a0649b558f)
+
+
+- ``grafana_parkings_d3_slices`` defines a Grafana dashboard with the parking data and a graph panel that draw specific comparison of predictions generated using deep learning approach at different time slices and acutal data depicting how accurate are the predictions indicated with blue lines with actual data indicated with green line. Import it in the grafana instance of interest and configure the variable Id in ``Settings`` panel which corresponds to the Id ``digitalhub`` datasource of your instance.
+
+  ![image](https://github.com/user-attachments/assets/99ee7bb3-2ae9-45fa-9afa-ef7a64cce42a)
+
 
 ## 4. Data Services
 
