@@ -11,7 +11,7 @@ Parking predictor is based on prediction model generated using deep learning(NBE
 - preprocessing the data in order to prepare it for training
 - perform model training and registering the model
 - serving the model using a custom API.
-- dashboard
+- dashboard visualization
 
 ## License
 
