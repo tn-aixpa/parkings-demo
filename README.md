@@ -1,4 +1,23 @@
-# Parking Data
+# Parkings-Predictor
+
+#### AIPC 
+- ```kind```: product-template
+- ```ai```: Maching learning, Deep Learning
+- ```domain```: PA
+
+Parking predictor is based on prediction model generated using deep learning(NBEATS) and linear regression (SARIMAX) approaches using the open parking data of bologna city  This template allows for forecasting the occupancy ratio based on historical data. The product contains operations for
+
+- downloading the historical data and create the dataset on the platform Datalake 
+- preprocessing the data in order to prepare it for training
+- perform model training and registering the model
+- serving the model using a custom API.
+- dashboard
+
+## License
+
+[Apache License 2.0](./LICENSE)
+
+## Usage
 
 The project aims at elaborating the parking data, creating the necessary datasets, visualizations, and services for historical, actual, and forecasted parking data.
 The notebooks on project root demonstrate the functionality of the platform while the generated python source scripts can be found inside the 'src' folder.
@@ -16,7 +35,6 @@ The data management operations are defined inside the jpyter notebook [1_parcheg
 The data training consist of following activities
 - use of the digital hub platform ambient to read the data from data lake as created in the data management step.
 - train the data prediction model using deep learning(NBEATS) and linear regression (SARIMAX) approaches.
-- model serve.
 
 In this scenario, the data is trained and a comparison of predictions against acutal data is drawn using two different approaches
 
