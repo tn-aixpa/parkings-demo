@@ -9,4 +9,4 @@ def myhandler(url):
         
         s3_aggregate = pc.step(name="aggregate",  function="aggregate-parkings", action="job",inputs={"di":s1_dataset.outputs['dataset']},outputs={"parking_data_aggregated":"parking_data_aggregated"})
         
-        s4_to_db = pc.step(name="to_db",  function="to-db", action="job",inputs={"agg_di": s3_aggregate.outputs['parking_data_aggregated'],"parkings_di":s1_dataset.outputs['dataset']},outputs={})
+        s4_to_db = pc.step(name="to_db",  function="to-db", action="job",inputs={"agg_di": s3_aggregate.outputs['parking_data_aggregated'],"parkings_di":s2_parking.outputs['parkings']},outputs={})

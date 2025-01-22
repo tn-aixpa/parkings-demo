@@ -19,8 +19,11 @@ def to_db(project, agg_di , parkings_di ):
     agg_df = agg_df[agg_df['day'].dt.date >= date]
     
     with engine.connect() as connection: 
-        try: connection.execute("DELETE FROM parkings, parking_data_aggregated") 
-        except: pass
+        try: 
+            connection.execute("DELETE FROM parkings") 
+            connection.execute("DELETE FROM parking_data_aggregated") 
+        except e: 
+            print(e)
 
     agg_df.to_sql("parking_data_aggregated", engine, if_exists="append")
     parkings_di.as_df().to_sql('parkings', engine, if_exists="append")
